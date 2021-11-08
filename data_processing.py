@@ -1,9 +1,11 @@
 from re import template
 import streamlit as st
+from sqlalchemy import create_engine
 import pandas as pd
 import plotly.express as px
 from download import *
-
+import MySQLdb
+   
 def data_processing():
 
     # DATA PROCESSING
@@ -16,7 +18,8 @@ def data_processing():
         df['NIK_CAPIL'] = df['NIK_CAPIL'].astype(str)
         df['NO_KK_CAPIL'] = df['NO_KK_CAPIL'].astype(str)
         df['NIK_CAPIL'] = df['NIK_CAPIL'].str.split(".").str[0]
-        df['NO_KK_CAPIL'] = df['NO_KK_CAPIL'].str.split(".").str[0] 
+        df['NO_KK_CAPIL'] = df['NO_KK_CAPIL'].str.split(".").str[0]
+        df['USIA'] = df['USIA'].astype('Int64')
         st.dataframe(df)
 
         st.write("")
@@ -35,11 +38,20 @@ def data_processing():
 
         st.dataframe(df.head())
 
+        # IMPORT DATAFRAME INTO MySQL
+        engine = create_engine('mysql://root:@localhost/db_bansos')
+        df.to_sql('bansos', con=engine, if_exists='append', index=False)
+
         st.write("")
 
         filename = "tes_download.xlsx"
         download_button_str = download_button(df, filename, f'Unduh disini {filename}', pickle_it=False)
         st.markdown(download_button_str, unsafe_allow_html=True)
+
+        # # SAVE FILE SPESIFIC DIRECTORY
+        # with open(os.path.join("dataset", filename.name), "wb") as f:
+        #     f.write(filename.getbuffer())
+        # st.success("File Tersimpan")
 
         # FILTERING CATEGORY
         st.sidebar.header("Filter berdasarkan: ")
