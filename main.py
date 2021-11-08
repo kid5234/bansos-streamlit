@@ -1,6 +1,8 @@
 from pandas.core.dtypes import base
 from download import *
 from data_processing import *
+from information_page import *
+from download_page import *
 from search import *
 from visualization import *
 import streamlit as st
@@ -9,7 +11,7 @@ import seaborn as sns
 
 def main():
     st.sidebar.title("Menu")
-    menu = ["Informasi", "Data Bansos"]
+    menu = ["Informasi", "Data Bansos", "Download"]
     choice = st.sidebar.selectbox("Silahkan pilih:", menu)
 
     if choice == "Informasi":
@@ -17,17 +19,19 @@ def main():
         information()
 
     elif choice == "Data Bansos":
+        st.subheader("Upload Data Bansos")
         # DATA PROCESSING
         data_processing()
+    elif choice == "Download":
+        st.subheader("Download Data")
+        download_page()
 
         # DATA VISUALIZATION
         # vis(filename) 
 
 def side_bar_menu():
     st.sidebar.title("Tentang E-Bansos")
-    st.sidebar.info(".......")
+    st.sidebar.info("...")
 
-def information():
-    st.markdown("Disini masuk isi konten")
-    st.write("disini juga, tapi belum ditata")
+
 

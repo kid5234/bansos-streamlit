@@ -4,6 +4,7 @@ from sqlalchemy import create_engine
 import pandas as pd
 import plotly.express as px
 from download import *
+from datetime import date
 import MySQLdb
    
 def data_processing():
@@ -36,8 +37,18 @@ def data_processing():
 
         df.insert(19, "LABEL", tempLabel)
 
+        date_now = []
+        today = date.today()
+
+        for i in range(0, len(df['NIK'])):
+            date_now.append(today)
+
+        df.insert(20, "DATE", date_now)
+
         st.dataframe(df.head())
 
+        
+            
         # IMPORT DATAFRAME INTO MySQL
         engine = create_engine('mysql://root:@localhost/db_bansos')
         df.to_sql('bansos', con=engine, if_exists='append', index=False)
@@ -48,8 +59,8 @@ def data_processing():
         download_button_str = download_button(df, filename, f'Unduh disini {filename}', pickle_it=False)
         st.markdown(download_button_str, unsafe_allow_html=True)
 
-        # # SAVE FILE SPESIFIC DIRECTORY
-        # with open(os.path.join("dataset", filename.name), "wb") as f:
+        # SAVE FILE SPESIFIC DIRECTORY
+        # with open(os.path.join('dataset', filename), "wb") as f:
         #     f.write(filename.getbuffer())
         # st.success("File Tersimpan")
 
