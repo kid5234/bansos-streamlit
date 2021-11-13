@@ -47,8 +47,6 @@ def data_processing():
 
         st.dataframe(df.head())
 
-        
-            
         # IMPORT DATAFRAME INTO MySQL
         engine = create_engine('mysql://root:@localhost/db_bansos')
         df.to_sql('bansos', con=engine, if_exists='append', index=False)
@@ -58,11 +56,6 @@ def data_processing():
         filename = "tes_download.xlsx"
         download_button_str = download_button(df, filename, f'Unduh disini {filename}', pickle_it=False)
         st.markdown(download_button_str, unsafe_allow_html=True)
-
-        # SAVE FILE SPESIFIC DIRECTORY
-        # with open(os.path.join('dataset', filename), "wb") as f:
-        #     f.write(filename.getbuffer())
-        # st.success("File Tersimpan")
 
         # FILTERING CATEGORY
         st.sidebar.header("Filter berdasarkan: ")

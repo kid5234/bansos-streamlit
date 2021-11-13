@@ -4,7 +4,7 @@ from matplotlib.figure import Figure
 from main import *
 from data_processing import *
 
-def viz():
+def visualization_page():
     st.markdown("tes")
     # # FILTERING CATEGORY
     # st.sidebar.header("Filter berdasarkan: ")
