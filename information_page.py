@@ -21,7 +21,7 @@ lottie_problematika = load_lottieurl('https://assets2.lottiefiles.com/packages/l
 
 lottie_peranan = load_lottieurl('https://assets8.lottiefiles.com/packages/lf20_kdivdeom.json')
 
-def information():
+def information(obj):
     # Layout 1
     row1_1, row1_2 = st.columns((3,2))
 
@@ -39,8 +39,9 @@ def information():
             """
         )
 
-        if st.button("Lihat Penerima Bansos"):
-            st.write("..")
+        if st.button("Lihat Penerima Bantuan Sosial"):
+            obj.data = "Visualisasi"
+            st.experimental_rerun()
 
     with row1_2:
         global lottie_bansos
