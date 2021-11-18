@@ -13,3 +13,8 @@ body {
 .stTextInput>div>div>input {
     color: #4F8BF9;
 }
+
+.py-20 {
+    padding-top: 5 rem;
+    padding-bottom: 5 rem;
+}

@@ -1,5 +1,5 @@
 import streamlit as st
-from main import *
+from main_menu import *
 
 st.set_page_config(page_title="E-Bansos",
                    page_icon=":moneybag:",
@@ -8,7 +8,7 @@ st.set_page_config(page_title="E-Bansos",
 
 st.sidebar.image("images/logo_kampus_merdeka.png", width=None, use_column_width=True)
 
-main()
+main(choice="Informasi")
 
 with st.sidebar.expander("Credits"):
         """
@@ -22,7 +22,6 @@ with st.sidebar.expander("Credits"):
         ### **Contacts**
         [![](https://img.shields.io/badge/GitHub-Follow-informational)](https://github.com/devanisdwi/bansos-streamlit)
         [![](https://img.shields.io/badge/Open-Issue-informational)](mailto:devanisdwis@gmail.com)
-        [![MAIL Badge](https://img.shields.io/badge/-devanisdwis@gmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:devanisdwis@gmail.com)](mailto:devanisdwis@gmail.com)
         
         ##### @ Cosmic Team, 2021
 
