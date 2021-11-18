@@ -15,6 +15,12 @@ def load_lottieurl(url: str):
 
 lottie_bansos = load_lottieurl('https://assets8.lottiefiles.com/packages/lf20_3P0UlV.json')
 
+lottie_kriteria = load_lottieurl('https://assets10.lottiefiles.com/packages/lf20_0ivllrpx.json')
+
+lottie_problematika = load_lottieurl('https://assets2.lottiefiles.com/packages/lf20_2zo0udtb.json')
+
+lottie_peranan = load_lottieurl('https://assets8.lottiefiles.com/packages/lf20_kdivdeom.json')
+
 def information():
     # Layout 1
     row1_1, row1_2 = st.columns((3,2))
@@ -33,145 +39,26 @@ def information():
             """
         )
 
-        if st.button("Lihat Penerima Bantuan Sosial"):
-            visualization_page()
-    
+        if st.button("Lihat Penerima Bansos"):
+            st.write("..")
+
     with row1_2:
         global lottie_bansos
-        st_lottie(lottie_bansos, speed=1, height=400, key="initial")
+        st_lottie(lottie_bansos, speed=1, height=400, key="awal_bansos")
 
     st.markdown("""<hr style="height:1px;border:none;color:#bbbbbb;background-color:#bbbbbb;" /> """, unsafe_allow_html=True)
-    
-    # Layout 2
-    st.header("Keterangan Data Bansos dalam E - Bansos")
 
-    row2_1, row2_2 = st.columns((1,1))
-
-    with row2_1:
-        with st.expander("NIK"):
-            st.write("Nomor NIK dari setiap penerima bantuan sosial.")
-            
-        with st.expander("NO KK"):
-            st.write("Nomor Kartu Keluarga dari setiap penerima bantuan sosial.")
-        
-        with st.expander("NIK CAPIL"):
-            st.write("Nomor NIK dari setiap penerima bantuan sosial yang sesuai dengan database dari capil.")
-        
-        with st.expander("NO KK CAPIL"):
-            st.write("Nomor Kartu Keluarga dari setiap penerima bantuan sosial yang sesuai dengan database dari capil.")
-        
-        with st.expander("NAMA"):
-            st.write("Nama lengkap penerima bantuan sosial")
-        
-        with st.expander("NAMA LENGKAP CAPIL"):
-            st.write("Nama lengkap penerima bantuan sosial yang sesuai dengan database dari capil")
-        
-        with st.expander("KATEGORI"):
-            st.write("Kategori pekerjan tiap penerima bantuan sosial")
-        
-        with st.expander("STATUS"):
-            st.write("Status keberadaan tiap penerima bantuan sosial")
-        
-        with st.expander("OPD PENGAMPU"):
-            st.write("Organisasi Perangkat Daerah yang memberikan anggaran kepada penerima bansos, diantaranya ialah:")
-            st.write("1. Dinas Sosial")
-            st.write("2. DISNAKER")
-            st.write("3. DISHUB")
-            st.write("4. DKUMKMP")
-            st.write("5. DPOP")
-        
-        with st.expander("TAHAP"):
-            st.write("Tahap pengajuan bantuan sosial yang terdiri dari beberapa kategori, seperti:")
-            st.write("1. Tahap 1")
-            st.write("2. Tahap 2 Aju Iya")
-            st.write("3. Tahap 2 Aju Tidak")            
-            st.write("4. Tidak")
-
-    with row2_2:
-        with st.expander("ALAMAT CAPIL"):
-            st.write("Alamat lengkap penerima bantuan sosial di Balikpapan yang sesuai dengan database dari capil")
-
-        with st.expander("KELURAHAN CAPIL"):
-            st.write("Data kelurahan penerima bantuan sosial di Balikpapan yang sesuai dengan database dari capil, seperti:")
-            st.write("1. Baru Ilir")
-            st.write("2. Baru Tengah")
-            st.write("3. Baru Ulu")
-            st.write("4. Batu Ampar")
-            st.write("5. Damai")
-            st.write("6. Damai Bahagia")
-            st.write("7. Damai Baru")
-            st.write("8. Graha Indah")
-            st.write("9. Gunung Bahagia")
-            st.write("10. Gunung Samarinda")
-            st.write("11. Gunung Samarinda Baru")
-            st.write("12. Gunung Sari Ilir")
-            st.write("13. Gunung Sari Ulu")
-            st.write("14. Karang Jati")
-            st.write("15. Karang Joang")
-            st.write("16. Karang Rejo")
-            st.write("17. Kariangau")
-            st.write("18. Klandasan Ilir")
-            st.write("19. Lamaru")
-            st.write("20. Manggar")
-            st.write("21. Manggar Baru")
-            st.write("22. Marga Sari")
-            st.write("23. Margo Mulyo")
-            st.write("24. Mekar Sari")
-            st.write("25. Muara Rapak")
-            st.write("26. Prapatan")
-            st.write("27. Sepinggan")
-            st.write("28. Sepinggan Baru")
-            st.write("29. Sepinggan Raya")
-            st.write("30. Sumber Rejo")
-            st.write("31. Sungai Nangka")
-            st.write("32. Telaga Sari")
-            st.write("33. Teritip")
-        
-        with st.expander("KECAMATAN CAPIL"):
-            st.write("Data kecamatan penerima bantuan sosial di Balikpapan yang sesuai dengan database dari capil")
-            st.write("1. Balikpapan Barat")
-            st.write("2. Balikpapan Kota")
-            st.write("3. Balikpapan Selatan")
-            st.write("4. Balikpapan Tengah")
-            st.write("5. Balikpapan Timur")
-            st.write("6. Balikpapan Utara")
-        
-        with st.expander("DOMISILI"):
-            st.write("")
-        
-        with st.expander("KETERANGAN NIK"):
-            st.write("")
-        
-        with st.expander("JENIS KELAMIN"):
-            st.write("Gender tiap penerima bansos")
-        
-        with st.expander("KETERANGAN NAMA"):
-            st.write("")
-        
-        with st.expander("KETERANGAN NIK DAN KK"):
-            st.write("")
-        
-        with st.expander("USIA"):
-            st.write("Rentang usia tiap penerima bansos")
-        
-        with st.expander("LABEL PENERIMA"):
-            st.write("Kategori penerima bansos yang terdiri dari:")
-            st.write("1. SANGAT LAYAK")
-            st.write("2. LAYAK")
-            st.write("3. TIDAK LAYAK")
+    st.subheader("Alur Pemberian Bantuan Sosial")
+    st.write("nanti disini diisi ilustrasi gambar alur bansos tapi gatau juga alurnya kekmana minta tolong siapa ya buat desainin")
 
     st.markdown("""<hr style="height:1px;border:none;color:#bbbbbb;background-color:#bbbbbb;" /> """, unsafe_allow_html=True)
 
     # Layout 3
-    row3_1, row3_2 = st.columns((1,1))
+    row3_1, row3_2 = st.columns((0.2,0.5))
 
     with row3_1:
-        st.subheader("Alur Pemberian Bantuan Sosial")
-        st.markdown(
-            """
-            gimana ya?
-            """
-        )
+        global lottie_kriteria
+        st_lottie(lottie_kriteria, speed=0.35, height=200, key="kriteria")
 
     with row3_2:
         st.subheader("Kriteria Penerima Bantuan Sosial")
@@ -188,10 +75,10 @@ def information():
     st.markdown("""<hr style="height:1px;border:none;color:#bbbbbb;background-color:#bbbbbb;" /> """, unsafe_allow_html=True)
 
     # Layout 4
-    row4_1, row4_2, row4_3 = st.columns((1, 1, 1))
+    row4_1, row4_2 = st.columns((0.8,0.5))
 
     with row4_1:
-        st.subheader("Permasalahan Data Bansos di Kota Balikpapan")
+        st.subheader("Problematika Data Bansos di Kota Balikpapan")
         st.write(
             """
             1. Data penerima bantuan sosial tidak akurat.
@@ -200,8 +87,21 @@ def information():
             4. Pengawasan dalam penyaluran bantuan sosial masih tergolong lemah. 
             """
         )
-    
+
     with row4_2:
+        global lottie_problematika
+        st_lottie(lottie_problematika, speed=0.35, height=200, key="problematika")
+
+    st.markdown("""<hr style="height:1px;border:none;color:#bbbbbb;background-color:#bbbbbb;" /> """, unsafe_allow_html=True)
+
+    # Layout 5
+    row5_1, row5_2 = st.columns((0.2,0.5))
+
+    with row5_1:
+        global lottie_peranan
+        st_lottie(lottie_peranan, speed=0.35, height=200, key="peranan")
+
+    with row5_2:
         st.subheader("Peranan Data dalam Penanganan Bansos")
         st.write(
             """
@@ -210,35 +110,63 @@ def information():
             3. Sebagai bahan evaluasi agar pemerintah kedepannya lebih baik lagi dalam menyelesaikan permasalahan terkait penyaluran bantuan sosial serta mencari solusi bersama dalam menghadapi kendala-kendala yang ada. 
             """
         )
-    
-    with row4_3:
+
+    st.markdown("""<hr style="height:1px;border:none;color:#bbbbbb;background-color:#bbbbbb;" /> """, unsafe_allow_html=True)
+
+    # Layout 6
+    row6_1, row6_2, row6_3 = st.columns((2, 0.1, 0.1))
+
+    with row6_1:
         st.subheader("Kesimpulan E - Bansos")
         st.write(
             """
             E - Bansos merupakan salah satu upaya pemerintah Kota Balikpapan kepada masyarakat dalam mendapatkan informasi mengenai penyaluran bantuan sosial. Dengan adanya e-bansos proses pendistribusian bantuan sosial diharapkan dapat menjadi lebih mudah, transparan, dan jelas.
             """
         )
+        
+    
+    with row6_2:
+        st.write("")
+        
+    
+    with row6_3:
+        st.write("")
+        
     
     st.markdown("""<hr style="height:1px;border:none;color:#bbbbbb;background-color:#bbbbbb;" /> """, unsafe_allow_html=True)
 
-    # Layout 5
-    st.markdown("<h1 style='text-align: center; color: dark-blue;'>Supported By:</h1>", unsafe_allow_html=True)
+    # Layout 7
+    st.markdown("<h3 style='text-align: center; color: dark-blue;'>E - Bansos bekerja sama dengan</h3>", unsafe_allow_html=True)
     
-    row5_1, row5_2, row5_3, row5_4, row5_5 = st.columns((2,1,0.5,0.7,2))
+    row7_1, row7_2, row7_3, row7_4, row7_5 = st.columns((1,2,1.2,0.9,0.7))
 
-    with row5_1:
+    with row7_1:
         st.markdown("")
     
-    with row5_2:
-        st.image("images/logo_mka.png", width=None)
+    with row7_2:
+        st.image("images/logo_mka.png", width=300)
 
-    with row5_3:
-        st.image("images/logo_balikpapan.png", width=None)
-    
-    with row5_4:
-        st.image("images/logo_kampus_merdeka.png", width=None)
-    
-    with row5_5:
+    with row7_3:
         st.markdown("")
+    
+    with row7_4:
+        st.image("images/logo_balikpapan.png", width=100)
+        
+
+    with row7_5:
+        st.markdown("")
+
+    # Layout 8
+    row8_1, row8_2, row8_3 = st.columns((0.5,1.2,0.8))
+
+    with row8_1:
+        st.markdown("")
+    
+    with row8_2:
+        st.markdown("** PT. MEDIA KREASI ABADI **")
+    
+    with row8_3:
+        st.markdown("** PEMERINTAH KOTA BALIKPAPAN **")
+    
         
     
