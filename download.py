@@ -53,7 +53,7 @@ def download_button(object_to_download, download_filename, button_text, pickle_i
                 border-color: rgb(230, 234, 241);
                 border-image: initial;
             }} 
-            #{button_id}:hover {{
+            #{button_id}:hover {{ 
                 border-color: rgb(246, 51, 102);
                 color: rgb(246, 51, 102);
             }}
