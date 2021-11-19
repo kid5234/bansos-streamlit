@@ -2,19 +2,16 @@ import streamlit as st
 from main_menu import *
 import data
 
-# def changeValue():
-#         global choice
-#         choice = "Visualisasi"
 obj = data.obj
 
 def mainn(choice = ""):
         global obj
         st.set_page_config(page_title="E-Bansos",
-                        page_icon=":moneybag:",
-                        layout="wide",
+                           page_icon=":moneybag:",
+                           layout="wide",
         )
 
-        st.sidebar.image("images/logo_kampus_merdeka.png", width=None, use_column_width=True)
+        st.sidebar.image("images/logo_pandu.png", width=None, use_column_width=True)
 
         main(obj)
 

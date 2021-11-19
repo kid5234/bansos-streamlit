@@ -8,16 +8,16 @@ import streamlit as st
 def main(obj = ""):
     st.sidebar.title("Menu")
     index = 0
-    # st.write(obj.data)
+
     if obj.data == "Informasi":
         index = 0
-    elif obj.data == "Data Bansos":
+    elif obj.data == "Unggah":
         index = 1
     elif obj.data == "Visualisasi":
         index = 2
-    elif obj.data == "Download":
+    elif obj.data == "Unduh":
         index = 3
-    menu = ["Informasi", "Data Bansos", "Visualisasi", "Download"]
+    menu = ["Informasi", "Unggah", "Visualisasi", "Unduh"]
     choice = st.sidebar.selectbox("Silahkan pilih:", menu, index)
     
     if choice == "Informasi":
@@ -25,21 +25,21 @@ def main(obj = ""):
         index = 0
         information(obj)
 
-    elif choice == "Data Bansos":
-        obj.data = "Data Bansos"
+    elif choice == "Unggah":
+        obj.data = "Unggah"
         index = 1
-        st.subheader("Upload Data Bansos")
+        st.subheader("Unggah Data Bantuan Sosial - Kota Balikpapan")
         data_processing()
 
     elif choice == "Visualisasi":
         obj.data = "Visualisasi"
         index = 2
-        st.subheader("Visualisasi Data")
+        st.subheader("Visualisasi Data Bantuan Sosial - Kota Balikpapan")
         visualization_page()
 
-    elif choice == "Download":
-        obj.data == "Download"
+    elif choice == "Unduh":
+        obj.data == "Unduh"
         index = 3
-        st.subheader("Download Data")
+        st.subheader("Unduh Data Bantuan Sosial - Kota Balikpapan")
         download_page()
     

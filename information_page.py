@@ -26,8 +26,8 @@ def information(obj):
     row1_1, row1_2 = st.columns((3,2))
 
     with row1_1:
-        st.header("Selamat Datang di Platform")
-        st.title("E - Bansos Kota Balikpapan")
+        st.subheader("Selamat Datang di Platform")
+        st.image("images/logo_pandu_detail.png")
         st.write(
             """
             Platform ini merupakan upaya Pemerintah Kota Balikpapan dalam rangka
@@ -47,10 +47,8 @@ def information(obj):
         global lottie_bansos
         st_lottie(lottie_bansos, speed=1, height=400, key="awal_bansos")
 
-    st.markdown("""<hr style="height:1px;border:none;color:#bbbbbb;background-color:#bbbbbb;" /> """, unsafe_allow_html=True)
-
-    st.subheader("Alur Pemberian Bantuan Sosial")
-    st.write("nanti disini diisi ilustrasi gambar alur bansos tapi gatau juga alurnya kekmana minta tolong siapa ya buat desainin")
+    # ALUR BANSOS
+    st.image("images/alur_bansos.png")
 
     st.markdown("""<hr style="height:1px;border:none;color:#bbbbbb;background-color:#bbbbbb;" /> """, unsafe_allow_html=True)
 
@@ -118,10 +116,10 @@ def information(obj):
     row6_1, row6_2, row6_3 = st.columns((2, 0.1, 0.1))
 
     with row6_1:
-        st.subheader("Kesimpulan E - Bansos")
+        st.subheader("Kesimpulan Platform Pandu - Balikpapan")
         st.write(
             """
-            E - Bansos merupakan salah satu upaya pemerintah Kota Balikpapan kepada masyarakat dalam mendapatkan informasi mengenai penyaluran bantuan sosial. Dengan adanya e-bansos proses pendistribusian bantuan sosial diharapkan dapat menjadi lebih mudah, transparan, dan jelas.
+            Pandu - Balikpapan merupakan salah satu upaya pemerintah Kota Balikpapan kepada masyarakat dalam mendapatkan informasi mengenai penyaluran bantuan sosial. Adanya platform ini dapat membuat proses pendistribusian bantuan sosial diharapkan dapat menjadi lebih mudah, transparan, dan jelas.
             """
         )
         
@@ -137,37 +135,36 @@ def information(obj):
     st.markdown("""<hr style="height:1px;border:none;color:#bbbbbb;background-color:#bbbbbb;" /> """, unsafe_allow_html=True)
 
     # Layout 7
-    st.markdown("<h3 style='text-align: center; color: dark-blue;'>E - Bansos bekerja sama dengan</h3>", unsafe_allow_html=True)
-    
-    row7_1, row7_2, row7_3, row7_4, row7_5 = st.columns((1,2,1.2,0.9,0.7))
+    st.markdown("<h4 style='text-align: center; color: dark-blue;'>Mitra kami</h4>", unsafe_allow_html=True)
+
+    row7_1, row7_2, row7_3 = st.columns((2,1.1,1.6))
 
     with row7_1:
         st.markdown("")
     
     with row7_2:
-        st.image("images/logo_mka.png", width=300)
+        st.image("images/logo_balikpapan.png", width=100)
 
     with row7_3:
         st.markdown("")
-    
-    with row7_4:
-        st.image("images/logo_balikpapan.png", width=100)
-        
-
-    with row7_5:
-        st.markdown("")
 
     # Layout 8
-    row8_1, row8_2, row8_3 = st.columns((0.5,1.2,0.8))
+    row8_1, row8_2, row8_3 = st.columns((1.8,1,1))
 
     with row8_1:
         st.markdown("")
     
     with row8_2:
-        st.markdown("** PT. MEDIA KREASI ABADI **")
+        st.image("images/logo_mka.png", width=50)
     
     with row8_3:
-        st.markdown("** PEMERINTAH KOTA BALIKPAPAN **")
+        st.markdown("")
     
-        
+    m = st.markdown("""
+        <style>
+        div.stButton > button:first-child {
+            background-color: #D7E9F7;
+        }
+        </style>""", unsafe_allow_html=True)
+
     
