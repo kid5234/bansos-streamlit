@@ -175,6 +175,9 @@ def data_processing():
         df.insert(20, "DATE", date_now)
 
         st.dataframe(df.head())
+        #AUTO SAVE INTO LOCAL DIRECTORY
+        savetodir = "dataset/data_bansos_"+today.strftime("%Y-%m-%d")+".xlsx"
+        df.to_excel(savetodir, sheet_name="databansos")
 
         # IMPORT DATAFRAME INTO MySQL
         engine = create_engine('mysql://root:@localhost/db_bansos')
