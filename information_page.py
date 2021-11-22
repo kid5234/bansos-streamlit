@@ -136,35 +136,44 @@ def information(obj):
 
     # Layout 7
     st.markdown("<h4 style='text-align: center; color: dark-blue;'>Mitra kami</h4>", unsafe_allow_html=True)
-
-    row7_1, row7_2, row7_3 = st.columns((2,1.1,1.6))
-
-    with row7_1:
-        st.markdown("")
     
-    with row7_2:
-        st.image("images/logo_balikpapan.png", width=100)
+    #custom CSS 
+    col1, col2 = st.columns(2)
+    img1 = "images/logo_balikpapan.png"
+    img2 = "images/logo_mka.png"
+    st.markdown( f"""
+    <style>
+        .img_bpp{{
+            margin: auto;
+            display:block;
+            width: 100px ;
+            height: 115px;
+        }}
+        .img_mka{{
+            margin: auto;
+            display:block;
+            margin-top: 15px;
+            width: 300px ;
+            height: 100px;
+        }}
+        .capt{{
+            margin-top: 5px;
+            text-align:center;
+            display: block;
+        }}
+       
+    </style>
+    """, unsafe_allow_html=True)
 
-    with row7_3:
-        st.markdown("")
 
-    # Layout 8
-    row8_1, row8_2, row8_3 = st.columns((1.8,1,1))
+    with col1:
+        st.markdown(f"""
+        <img class="img_bpp" src="data:image/png;base64,{base64.b64encode(open(img1, "rb").read()).decode()}">
+        <span class="capt">Kota Balikpapan</span>
+        """, unsafe_allow_html=True)
 
-    with row8_1:
-        st.markdown("")
-    
-    with row8_2:
-        st.image("images/logo_mka.png", width=50)
-    
-    with row8_3:
-        st.markdown("")
-    
-    m = st.markdown("""
-        <style>
-        div.stButton > button:first-child {
-            background-color: #D7E9F7;
-        }
-        </style>""", unsafe_allow_html=True)
-
-    
+    with col2:
+        st.markdown(f"""
+        <img class="img_mka" src="data:image/png;base64,{base64.b64encode(open(img2, "rb").read()).decode()}">
+        <span class="capt">PT. Media Kreasi Abadi</span>
+        """, unsafe_allow_html=True)
