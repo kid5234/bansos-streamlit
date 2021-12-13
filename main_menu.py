@@ -1,3 +1,4 @@
+from numpy import empty
 from download import *
 from data_processing import *
 from download_page import *
@@ -10,10 +11,10 @@ import streamlit as st
 def main(obj = ""):
     st.sidebar.title("Menu")
     
-    # data = get_data()
-    
-    status = "admin"
-    nama = "iqbal"
+    if 'status' not in st.session_state:
+        status = "guest"
+    else:
+        status = st.session_state.status
 
     index = 0
 
@@ -29,19 +30,19 @@ def main(obj = ""):
         index = 4
     elif obj.data == "Unduh":
         index = 5
+    elif obj.data == "Logout":
+        index = 6
    
     if status != "admin":
-        st.sidebar.write("bukan admin")
-        menu = ["Informasi", "Visualisasi", "Login", "Registrasi"]
+        menu = ["Informasi", "Visualisasi", "Login"]
         choice = st.sidebar.selectbox("Silahkan pilih:", menu, index)
     
     elif status == "admin":
-        str = "admin "+nama
+        str = "Selamat datang "+st.session_state.username_str
         st.sidebar.write(str)
 
-        menu = ["Informasi", "Visualisasi", "Login", "Registrasi"]
-        menu.append("Unggah")
-        menu.append("Unduh")
+        menu = ["Informasi", "Visualisasi", "Unggah", "Unduh", "Tambah Admin", "Logout"]
+  
         choice = st.sidebar.selectbox("Silahkan pilih:", menu, index)
     
     
@@ -60,12 +61,12 @@ def main(obj = ""):
         obj.data == "Login"
         index = 2
         st.subheader("Login Admin")
-        login_page()
+        login_page(obj)
     
-    elif choice == "Registrasi":
-        obj.data == "Registrasi"
+    elif choice == "Tambah Admin":
+        obj.data == "Tambah Admin"
         index = 3
-        st.subheader("Registrasi Admin ")
+        st.subheader("Tambah Admin ")
         regist_page()
     
     elif choice == "Unggah":
@@ -78,3 +79,10 @@ def main(obj = ""):
         index = 5
         st.subheader("Unduh Data Bantuan Sosial - Kota Balikpapan")
         download_page()
+    elif choice == "Logout":
+        obj.data == "Logout"
+        index = 1
+        del st.session_state.id_str
+        del st.session_state.username_str
+        del st.session_state.status
+        information(obj)

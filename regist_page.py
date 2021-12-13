@@ -14,16 +14,16 @@ def regist_page():
     st.write(" ")
     #Generate ID
     id = np.random.randint(100,size=(1))
-
+    username = st.text_input("Masukkan Username")
     gmail = st.text_input("Masukkan Email")
     password = st.text_input("Masukkan Password", type='password')
     repassword = st.text_input("Masukkan Ulang Password", type='password')
     
     if st.button("Daftar"):
         get_data().clear() 
-        if len(gmail) > 0 and len(password) > 0 and len(repassword) > 0:
+        if len(username)>0 and len(gmail) > 0 and len(password) > 0 and len(repassword) > 0:
             if (repassword == password):   
-                get_data().append({"Id": id[0],"Email": gmail, "Password": password, "RePassword": repassword})
+                get_data().append({"Id": id[0], "Username":username, "Email": gmail, "Password": password, "RePassword": repassword})
                 df = pd.DataFrame(get_data())
                 if len(df) > 1:
                     st.error("gagal membuat Akun")
