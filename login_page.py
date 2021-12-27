@@ -11,13 +11,8 @@ def query(gmail, password):
     df = pd.read_sql(query, con=db_connection)
     return df
 
-def get_data(id, gmail):
-    return id, gmail
-
-
-def login_page():
+def login_page(obj):
     st.write(" ")
-
     gmail = st.text_input("Masukkan Email")
     password = st.text_input("Masukkan Password", type='password')
     repassword = st.text_input("Masukkan Ulang Password", type='password')
@@ -29,12 +24,15 @@ def login_page():
                 if len(data)>0:
                     st.success("berhasil")
                     id = data["Id"]
-                    gmail = data["Email"]
+                    username = data["Username"]
 
                     id_str= id.to_string(index=False)
-                    gmail_str = gmail.to_string(index=False)
-                    
-                    get_data(id_str, gmail_str)
+                    username_str = username.to_string(index=False)
+                
+                    if 'id_str' and 'username_str' and 'status' not in st.session_state:
+                        st.session_state['id_str'] = id_str
+                        st.session_state['username_str'] = username_str
+                        st.session_state['status'] = "admin"
                 else:
                     st.error("Data kosong")
             else:
