@@ -88,7 +88,7 @@ def main(obj = ""):
    
     elif choice == "Logout":
         obj.data == "Logout"
-        index = 5
+        index = 6
         del st.session_state.id_str
         del st.session_state.username_str
         del st.session_state.status
