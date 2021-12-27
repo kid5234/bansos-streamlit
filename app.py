@@ -6,10 +6,11 @@ obj = data.obj
 
 def mainn(choice = ""):
         global obj
+        
         st.set_page_config(page_title="E-Bansos",
                            page_icon=":moneybag:",
                            layout="wide",
-        )
+                   )
 
         st.sidebar.image("images/logo_pandu.png", width=None, use_column_width=True)
 
@@ -32,14 +33,14 @@ def mainn(choice = ""):
 
                 """
 
-        # # ---- HIDE STREAMLIT STYLE ----
-        # hide_st_style = """
-        #             <style>
-        #             #MainMenu {visibility: hidden;}
-        #             footer {visibility: hidden;}
-        #             header {visibility: hidden;}
-        #             </style>
-        #             """
-        # st.markdown(hide_st_style, unsafe_allow_html=True)
+        # ---- HIDE STREAMLIT STYLE ----
+        hide_st_style = """
+                    <style>
+                    #MainMenu {visibility: hidden;}
+                    footer {visibility: hidden;}
+                    header {visibility: hidden;}
+                    </style>
+                    """
+        st.markdown(hide_st_style, unsafe_allow_html=True)
 mainn()
 

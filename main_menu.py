@@ -36,14 +36,13 @@ def main(obj = ""):
         choice = st.sidebar.selectbox("Silahkan pilih:", menu, index)
     
     elif status == "admin":
-        str = "admin "+nama
+        str = "admin " + nama
         st.sidebar.write(str)
 
         menu = ["Informasi", "Visualisasi", "Login", "Registrasi"]
         menu.append("Unggah")
         menu.append("Unduh")
         choice = st.sidebar.selectbox("Silahkan pilih:", menu, index)
-    
     
     if choice == "Informasi":
         obj.data = "Informasi"
@@ -73,6 +72,7 @@ def main(obj = ""):
         index = 4
         st.subheader("Unggah Data Bantuan Sosial - Kota Balikpapan")
         data_processing()
+
     elif choice == "Unduh":
         obj.data == "Unduh"
         index = 5

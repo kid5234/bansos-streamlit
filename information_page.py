@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import urllib.request
 import requests
+import base64
 from datetime import date
 from pandas import json_normalize
 from streamlit_lottie import st_lottie
