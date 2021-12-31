@@ -144,25 +144,6 @@ def visualization_page():
         "KECAMATAN_CAPIL == @kecamatan_capil & KELURAHAN_CAPIL == @kelurahan_capil & JENIS_KELAMIN == @jenis_kelamin & LABEL == @label & STATUS == @status & OPD_PENGAMPU == @opd_pengampu & TAHAP == @tahap"
     )
 
-    # dfOpd = df_selection[['OPD_PENGAMPU']]
-    # dfOpd = dfOpd.fillna('Tidak ada OPD')
-    # dfOpd = dfOpd.value_counts().reset_index()
-    # dfOpd.columns = ['OPD_PENGAMPU', 'count']
-    # st.dataframe(dfOpd)
-
-    # dfUsia = df_selection[['USIA', 'JENIS_KELAMIN']]
-    # # dfUsia = dfUsia.fillna('Tidak Terdeteksi')
-    # dfUsia = dfUsia.value_counts().reset_index()
-    # dfUsia.columns = ['USIA', 'JENIS KELAMIN', 'count']
-    # st.dataframe(dfUsia)
-
-    dfKategori = df_selection[['KATEGORI', 'LABEL']]
-    dfKategori = dfKategori.fillna('Tidak ada KATEGORI')
-    dfKategori = dfKategori.value_counts().reset_index()
-    dfKategori.columns = ['KATEGORI', 'LABEL', 'JUMLAH']
-    dfKategori = pd.pivot_table(data = dfKategori, index=['KATEGORI'], columns=['LABEL'], values=['JUMLAH'])
-    st.dataframe(dfKategori)
-
     # Jumlah Data
     total_data = (df_selection["LABEL"] != "" ).sum()
     total_diterima = (df_selection["LABEL"] != "TIDAK LAYAK DAPAT BANSOS").sum()
@@ -213,11 +194,6 @@ def visualization_page():
     row_gender_label, row_kategori = st.columns(2)
     with row_gender_label:
         # GENDER
-        # cursorBansos.execute("select jenis_kelamin, count(jenis_kelamin) from bansos group by jenis_kelamin union select case when jenis_kelamin is null then 'Tidak Terdeteksi' else jenis_kelamin end, count(*)-count(jenis_kelamin) from bansos where jenis_kelamin is null");
-        # rows = cursorBansos.fetchall()
-        # dfGender = pd.DataFrame( [[ij for ij in i] for i in rows] )
-        # dfGender.rename(columns={0: 'JENIS_KELAMIN',
-        #                          1: 'count'}, inplace=True);
         dfGender = df_selection[['JENIS_KELAMIN']]
         dfGender = dfGender.fillna('Tidak Terdeteksi')
         dfGender = dfGender.value_counts().reset_index()
@@ -227,13 +203,8 @@ def visualization_page():
             parentGender.append("")
         figGender = px.treemap(dfGender, names=dfGender['JENIS_KELAMIN'].unique(), parents=parentGender, values='count', title='Persebaran Data berdasarkan Jenis Kelamin')
         st.plotly_chart(figGender)
-
+    with row_kategori:
         # LABEL
-        # cursorBansos.execute("select label, count(label) from bansos group by label union select case when label is null then 'Tidak Terdeteksi' else label end, count(*)-count(label) from bansos where label is null");
-        # rows = cursorBansos.fetchall()
-        # dfLabel = pd.DataFrame( [[ij for ij in i] for i in rows] )
-        # dfLabel.rename(columns={0: 'LABEL',
-        #                          1: 'count'}, inplace=True);
         dfLabel = df_selection[['LABEL']]
         dfLabel = dfLabel.fillna('Tidak Terdeteksi')
         dfLabel = dfLabel.value_counts().reset_index()
@@ -243,47 +214,36 @@ def visualization_page():
             parentLabel.append("")
         figLabel = px.treemap(dfLabel, names=dfLabel['LABEL'].unique(), parents=parentLabel, values='count', title='Persebaran Data berdasarkan Label')
         st.plotly_chart(figLabel)
-    with row_kategori:
-        cursorBansos.execute("select kategori, count(kategori) from bansos group by kategori union select case when kategori is null then 'Tidak Terdeteksi' else kategori end, count(*)-count(kategori) from bansos where kategori is null");
-        rows = cursorBansos.fetchall()
-        dfKategori = pd.DataFrame( [[ij for ij in i] for i in rows] )
-        dfKategori.rename(columns={0: 'KATEGORI',
-                                   1: 'count'}, inplace=True);
-        # figKategori = 
-        # st.plotly_chart(figKategori)
-        st.write("TABLE PIVOT")
     
-    # STATUS
-    # cursorBansos.execute("select status, count(status) from bansos group by status union select case when status is null then 'Tidak Terdeteksi' else status end, count(*)-count(status) from bansos where status is null");
-    # rows = cursorBansos.fetchall()
-    # dfStatus = pd.DataFrame( [[ij for ij in i] for i in rows] )
-    # dfStatus.rename(columns={0: 'STATUS',
-    #                         1: 'count'}, inplace=True);
-    dfStatus = df_selection[['STATUS']]
-    dfStatus = dfStatus.fillna('Tidak Terdeteksi')
-    dfStatus = dfStatus.value_counts().reset_index()
-    dfStatus.columns = ['STATUS', 'count']
-    figStatus = px.bar(dfStatus, x='count',
-                    y='STATUS', color='STATUS', orientation='h',
-                    title='Persebaran Data berdasarkan Status')
-    st.plotly_chart(figStatus)
+    # PIVOT TABLE KATEGORI
+    dfKategori = df_selection[['KATEGORI', 'LABEL']]
+    dfKategori = dfKategori.fillna('Tidak ada KATEGORI')
+    dfKategori = dfKategori.value_counts().reset_index()
+    dfKategori.columns = ['KATEGORI', 'LABEL', 'JUMLAH']
+    dfKategori = pd.pivot_table(data = dfKategori, index=['KATEGORI'], columns=['LABEL'], values=['JUMLAH'])
+    st.dataframe(dfKategori)
 
-    # USIA DAN GENDER
-    # cursorBansos.execute("SELECT usia, count(usia), JENIS_KELAMIN FROM bansos where usia is not null group by usia, JENIS_KELAMIN ");
-    # rows = cursorBansos.fetchall()
-    # dfUsia = pd.DataFrame( [[ij for ij in i] for i in rows] )
-    # dfUsia.rename(columns={0: 'USIA',
-    #                         1: 'JUMLAH',
-    #                         2: 'JENIS KELAMIN'}, inplace=True);
-    # st.dataframe(dfUsia)
-    dfUsia = df_selection[['USIA', 'JENIS_KELAMIN']]
-    # dfUsia = dfUsia.fillna('Tidak Terdeteksi')
-    dfUsia = dfUsia.value_counts().reset_index()
-    dfUsia.columns = ['USIA', 'JENIS KELAMIN', 'JUMLAH']
-    dfUsia = dfUsia.sort_values(by = 'USIA')
-    # st.dataframe(dfUsia)
-    figUsia = px.line(dfUsia, x='USIA', y='JUMLAH', color='JENIS KELAMIN', symbol="JENIS KELAMIN")
-    st.plotly_chart(figUsia)
+    col_status, col_usia = st.columns(2)
+    with col_status:    
+        # STATUS
+        dfStatus = df_selection[['STATUS']]
+        dfStatus = dfStatus.fillna('Tidak Terdeteksi')
+        dfStatus = dfStatus.value_counts().reset_index()
+        dfStatus.columns = ['STATUS', 'count']
+        figStatus = px.bar(dfStatus, x='count',
+                        y='STATUS', color='STATUS', orientation='h',
+                        title='Persebaran Data berdasarkan Status')
+        st.plotly_chart(figStatus)
+    with col_usia:
+        # USIA DAN GENDER
+        dfUsia = df_selection[['USIA', 'JENIS_KELAMIN']]
+        # dfUsia = dfUsia.fillna('Tidak Terdeteksi')
+        dfUsia = dfUsia.value_counts().reset_index()
+        dfUsia.columns = ['USIA', 'JENIS KELAMIN', 'JUMLAH']
+        dfUsia = dfUsia.sort_values(by = 'USIA')
+        # st.dataframe(dfUsia)
+        figUsia = px.line(dfUsia, x='USIA', y='JUMLAH', color='JENIS KELAMIN', symbol="JENIS KELAMIN")
+        st.plotly_chart(figUsia)
 
 
 
