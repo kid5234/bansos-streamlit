@@ -1,9 +1,5 @@
-import base64
-from pandas.core.indexes import base
 import streamlit as st
 import os
-import pandas as pd
-from download import *
 import pandas as pd
 from download import download_button
     

@@ -4,7 +4,6 @@ from sqlalchemy import create_engine
 import pandas as pd
 from download import *
 from datetime import date
-import MySQLdb
 
 def data_processing():
 

@@ -1,9 +1,6 @@
-from pandas.core.dtypes import base
 import streamlit as st
 import pandas as pd
 import io
-
-import os
 import base64
 import json
 import pickle

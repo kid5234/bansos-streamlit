@@ -1,4 +1,3 @@
-from numpy import empty
 from download import *
 from data_processing import *
 from download_page import *
