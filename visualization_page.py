@@ -5,6 +5,7 @@ import pandas as pd
 import datetime
 import MySQLdb
 
+
 def visualization_page():
     # html_temp = "<div class='tableauPlaceholder' id='viz1638766654954' style='position: relative'><noscript><a href='#'><img alt='DStreamlit ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ba&#47;BansosRevisi&#47;DStreamlit&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='BansosRevisi&#47;DStreamlit' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ba&#47;BansosRevisi&#47;DStreamlit&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1638766654954');                    var vizElement = divElement.getElementsByTagName('object')[0];                    if ( divElement.offsetWidth > 800 ) { vizElement.style.width='1000px';vizElement.style.height='1827px';} else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='1000px';vizElement.style.height='1827px';} else { vizElement.style.width='100%';vizElement.style.height='3327px';}                     var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>"
     # components.html(html_temp, width=1000, height=1500)
@@ -157,18 +158,16 @@ def visualization_page():
         st.subheader("Total Ditolak:")
         st.subheader(f"{total_ditolak} Jiwa")
 
-    row_map1, row_map2= st.columns(2)
-
-    with row_map1:
-        st.markdown("Maps Kecamatan")
+    st.write("")
+    st.markdown("Maps Kecamatan")
+   
+    dfKelurahan = df_selection[['KELURAHAN_CAPIL', 'LATITUDE', 'LONGITUDE']]
+    dfKelurahan = dfKelurahan.value_counts().reset_index()
+    dfKelurahan.columns = ['KELURAHAN_CAPIL', 'lat', 'lon', 'count']
+    dfKelurahan['text'] = dfKelurahan['KELURAHAN_CAPIL']
+    figKelurahan = px.scatter_geo(dfKelurahan, lat='lat', lon='lon', size='count', text=dfKelurahan['text'])
     
-    with row_map2:
-        dfKelurahan = df_selection[['KELURAHAN_CAPIL', 'LATITUDE', 'LONGITUDE']]
-        dfKelurahan = dfKelurahan.value_counts().reset_index()
-        dfKelurahan.columns = ['KELURAHAN_CAPIL', 'lat', 'lon', 'count']
-        dfKelurahan['text'] = dfKelurahan['KELURAHAN_CAPIL']
-        figKelurahan = px.scatter_geo(dfKelurahan, lat='lat', lon='lon', size='count', text=dfKelurahan['text'])
-        st.plotly_chart(figKelurahan)
+    st.plotly_chart(figKelurahan, use_container_width=True)
 
     row_OPD, row_tahap = st.columns(2)
     with row_OPD:
@@ -179,14 +178,16 @@ def visualization_page():
         figOPD = px.bar(dfOPD, x='OPD_PENGAMPU',
                         y='count', color='count',
                         title='Persebaran Data berdasarkan OPD Pengampu')
-        st.plotly_chart(figOPD)
+        st.plotly_chart(figOPD, use_container_width=True)
+
     with row_tahap:
         dfTahap = df_selection[['TAHAP']]
         dfTahap = dfTahap.fillna('Tidak Terdeteksi')
         dfTahap = dfTahap.value_counts().reset_index()
         dfTahap.columns = ['TAHAP', 'count']
         figTahap = px.pie(dfTahap, values='count', names='TAHAP', title='Persebaran Data berdasarkan Tahap', hole=0.4)
-        st.plotly_chart(figTahap)
+        st.plotly_chart(figTahap, use_container_width=True)
+
     
     row_gender_label, row_kategori = st.columns(2)
     with row_gender_label:
@@ -199,7 +200,8 @@ def visualization_page():
         for i in range(len(dfGender['JENIS_KELAMIN'].unique())):
             parentGender.append("")
         figGender = px.treemap(dfGender, names=dfGender['JENIS_KELAMIN'].unique(), parents=parentGender, values='count', title='Persebaran Data berdasarkan Jenis Kelamin')
-        st.plotly_chart(figGender)
+        st.plotly_chart(figGender, use_container_width=True)
+
     with row_kategori:
         # LABEL
         dfLabel = df_selection[['LABEL']]
@@ -210,7 +212,7 @@ def visualization_page():
         for i in range(len(dfLabel['LABEL'].unique())):
             parentLabel.append("")
         figLabel = px.treemap(dfLabel, names=dfLabel['LABEL'].unique(), parents=parentLabel, values='count', title='Persebaran Data berdasarkan Label')
-        st.plotly_chart(figLabel)
+        st.plotly_chart(figLabel, use_container_width=True)
     
     # PIVOT TABLE KATEGORI
     dfKategori = df_selection[['KATEGORI', 'LABEL']]
@@ -220,27 +222,27 @@ def visualization_page():
     dfKategori = pd.pivot_table(data = dfKategori, index=['KATEGORI'], columns=['LABEL'], values=['JUMLAH'])
     st.dataframe(dfKategori)
 
-    col_status, col_usia = st.columns(2)
-    with col_status:    
-        # STATUS
-        dfStatus = df_selection[['STATUS']]
-        dfStatus = dfStatus.fillna('Tidak Terdeteksi')
-        dfStatus = dfStatus.value_counts().reset_index()
-        dfStatus.columns = ['STATUS', 'count']
-        figStatus = px.bar(dfStatus, x='count',
-                        y='STATUS', color='STATUS', orientation='h',
-                        title='Persebaran Data berdasarkan Status')
-        st.plotly_chart(figStatus)
-    with col_usia:
-        # USIA DAN GENDER
-        dfUsia = df_selection[['USIA', 'JENIS_KELAMIN']]
-        # dfUsia = dfUsia.fillna('Tidak Terdeteksi')
-        dfUsia = dfUsia.value_counts().reset_index()
-        dfUsia.columns = ['USIA', 'JENIS KELAMIN', 'JUMLAH']
-        dfUsia = dfUsia.sort_values(by = 'USIA')
-        # st.dataframe(dfUsia)
-        figUsia = px.line(dfUsia, x='USIA', y='JUMLAH', color='JENIS KELAMIN', symbol="JENIS KELAMIN")
-        st.plotly_chart(figUsia)
+    
+    # STATUS
+    dfStatus = df_selection[['STATUS']]
+    dfStatus = dfStatus.fillna('Tidak Terdeteksi')
+    dfStatus = dfStatus.value_counts().reset_index()
+    dfStatus.columns = ['STATUS', 'count']
+    figStatus = px.bar(dfStatus, x='count',
+                    y='STATUS', color='STATUS', orientation='h',
+                    title='Persebaran Data berdasarkan Status')
+    st.plotly_chart(figStatus, use_container_width=True)
+
+
+    # USIA DAN GENDER
+    dfUsia = df_selection[['USIA', 'JENIS_KELAMIN']]
+    # dfUsia = dfUsia.fillna('Tidak Terdeteksi')
+    dfUsia = dfUsia.value_counts().reset_index()
+    dfUsia.columns = ['USIA', 'JENIS KELAMIN', 'JUMLAH']
+    dfUsia = dfUsia.sort_values(by = 'USIA')
+    # st.dataframe(dfUsia)
+    figUsia = px.line(dfUsia, x='USIA', y='JUMLAH', color='JENIS KELAMIN', symbol="JENIS KELAMIN")
+    st.plotly_chart(figUsia, use_container_width=True)
 
 
 
