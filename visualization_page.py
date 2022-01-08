@@ -158,16 +158,26 @@ def visualization_page():
         st.subheader("Total Ditolak:")
         st.subheader(f"{total_ditolak} Jiwa")
 
-    st.write("")
-    st.markdown("Maps Kecamatan")
-   
-    dfKelurahan = df_selection[['KELURAHAN_CAPIL', 'LATITUDE', 'LONGITUDE']]
-    dfKelurahan = dfKelurahan.value_counts().reset_index()
-    dfKelurahan.columns = ['KELURAHAN_CAPIL', 'lat', 'lon', 'count']
-    dfKelurahan['text'] = dfKelurahan['KELURAHAN_CAPIL']
-    figKelurahan = px.scatter_geo(dfKelurahan, lat='lat', lon='lon', size='count', text=dfKelurahan['text'])
-    
-    st.plotly_chart(figKelurahan, use_container_width=True)
+    row_kecamatan, row_kelurahan = st.columns(2)
+    with row_kecamatan:
+        st.markdown("Maps Kecamatan")
+        # dfKecamatan = df_selection[[]]
+        # dfKecamatan = dfKecamatan
+        # figKecamatan = px.choropleth_mapbox(dfKecamatan, geojson=counties, locations='fips', color='unemp',
+        #                                     color_continuous_scale="Viridis",
+        #                                     range_color=(0, 12),
+        #                                     mapbox_style="carto-positron",
+        #                                     zoom=10, center={'lat':, 'lon':},
+        #                                     opacity=0.5,
+        #                                     labels={'unemp'})
+
+    with row_kelurahan:
+        dfKelurahan = df_selection[['KELURAHAN_CAPIL', 'LATITUDE', 'LONGITUDE']]
+        dfKelurahan = dfKelurahan.value_counts().reset_index()
+        dfKelurahan.columns = ['KELURAHAN_CAPIL', 'lat', 'lon', 'count']
+        dfKelurahan['text'] = dfKelurahan['KELURAHAN_CAPIL']
+        figKelurahan = px.scatter_geo(dfKelurahan, lat='lat', lon='lon', size='count', scope='asia', text=dfKelurahan['text'], title='Persebaran Data berdasarkan Kelurahan')
+        st.plotly_chart(figKelurahan, use_container_width=True)
 
     row_OPD, row_tahap = st.columns(2)
     with row_OPD:
@@ -219,6 +229,7 @@ def visualization_page():
     dfKategori = dfKategori.fillna('Tidak ada KATEGORI')
     dfKategori = dfKategori.value_counts().reset_index()
     dfKategori.columns = ['KATEGORI', 'LABEL', 'JUMLAH']
+    st.write("Persebaran Data berdasarkan Kategori Pekerjaan")
     dfKategori = pd.pivot_table(data = dfKategori, index=['KATEGORI'], columns=['LABEL'], values=['JUMLAH'])
     st.dataframe(dfKategori)
 
@@ -236,12 +247,10 @@ def visualization_page():
 
     # USIA DAN GENDER
     dfUsia = df_selection[['USIA', 'JENIS_KELAMIN']]
-    # dfUsia = dfUsia.fillna('Tidak Terdeteksi')
     dfUsia = dfUsia.value_counts().reset_index()
     dfUsia.columns = ['USIA', 'JENIS KELAMIN', 'JUMLAH']
     dfUsia = dfUsia.sort_values(by = 'USIA')
-    # st.dataframe(dfUsia)
-    figUsia = px.line(dfUsia, x='USIA', y='JUMLAH', color='JENIS KELAMIN', symbol="JENIS KELAMIN")
+    figUsia = px.line(dfUsia, x='USIA', y='JUMLAH', color='JENIS KELAMIN', symbol="JENIS KELAMIN", title='Persebaran Data berdasarkan Usia')
     st.plotly_chart(figUsia, use_container_width=True)
 
 
