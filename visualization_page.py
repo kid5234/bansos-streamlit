@@ -158,26 +158,15 @@ def visualization_page():
         st.subheader("Total Ditolak:")
         st.subheader(f"{total_ditolak} Jiwa")
 
-    row_kecamatan, row_kelurahan = st.columns(2)
-    with row_kecamatan:
-        st.markdown("Maps Kecamatan")
-        # dfKecamatan = df_selection[[]]
-        # dfKecamatan = dfKecamatan
-        # figKecamatan = px.choropleth_mapbox(dfKecamatan, geojson=counties, locations='fips', color='unemp',
-        #                                     color_continuous_scale="Viridis",
-        #                                     range_color=(0, 12),
-        #                                     mapbox_style="carto-positron",
-        #                                     zoom=10, center={'lat':, 'lon':},
-        #                                     opacity=0.5,
-        #                                     labels={'unemp'})
-
-    with row_kelurahan:
-        dfKelurahan = df_selection[['KELURAHAN_CAPIL', 'LATITUDE', 'LONGITUDE']]
-        dfKelurahan = dfKelurahan.value_counts().reset_index()
-        dfKelurahan.columns = ['KELURAHAN_CAPIL', 'lat', 'lon', 'count']
-        dfKelurahan['text'] = dfKelurahan['KELURAHAN_CAPIL']
-        figKelurahan = px.scatter_geo(dfKelurahan, lat='lat', lon='lon', size='count', scope='asia', text=dfKelurahan['text'], title='Persebaran Data berdasarkan Kelurahan')
-        st.plotly_chart(figKelurahan, use_container_width=True)
+    # PETA
+    dfKelurahan = df_selection[['KELURAHAN_CAPIL', 'LATITUDE', 'LONGITUDE']]
+    dfKelurahan = dfKelurahan.value_counts().reset_index()
+    dfKelurahan.columns = ['KELURAHAN_CAPIL', 'lat', 'lon', 'count']
+    dfKelurahan['text'] = dfKelurahan['KELURAHAN_CAPIL']
+    access_token = 'pk.eyJ1IjoiZGV2YW5pc2R3aSIsImEiOiJja3kzeXFhcjQwMzU1MnZxYzJ5OG1rYmIxIn0.nB78CAvkZi-J9os0VsBoCw'
+    px.set_mapbox_access_token(access_token)
+    figKelurahan = px.scatter_mapbox(dfKelurahan, lat="lat", lon='lon', size='count', size_max=15, zoom=11, hover_name='KELURAHAN_CAPIL')
+    st.plotly_chart(figKelurahan, use_container_width=True)
 
     row_OPD, row_tahap = st.columns(2)
     with row_OPD:
