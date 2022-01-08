@@ -11,32 +11,42 @@ def data_processing():
         Sebelum mengunggah data bantuan sosial, alangkah baiknya perlu diperhatikan beberapa syarat dan ketentuan setiap kategori data pada file yang akan diunggah. Syarat dan Ketentuan Dataset yang akan diunggah adalah sebagai berikut:
         """
     )
-    st.markdown("1. Tipe File Excel")
+    
+    st.markdown("1. Menggunakan Tipe File Excel")
     st.markdown("2. Berisi kolom-kolom data sesuai dengan list keterangan data bansos")
     st.markdown("3. Data telah bersih dari anomali, kesalahan kata, dll")
-    st.markdown("4. ...")
+    st.markdown("Atau bisa unduh sampel data yang telah kami siapkan dibawah ini:")
+    with open("sampel_data.xlsx", "rb") as file:
+        buttonSampel = st.download_button(
+            label="Unduh Sampel Data",
+            data=file,
+            file_name="sampel_data.xlsx",
+            mime="file/xlsx"
+        )
+    buttonSampel
+
     st.markdown("##### ** Keterangan Data Bansos dalam E - Bansos: **")
 
     row2_1, row2_2 = st.columns((1,1))
 
     with row2_1:
         with st.expander("NIK"):
-            st.write("Nomor NIK dari setiap penerima bantuan sosial.")
+            st.write("Nomor NIK penerima bantuan sosial.")
             
         with st.expander("NO KK"):
-            st.write("Nomor Kartu Keluarga dari setiap penerima bantuan sosial.")
+            st.write("Nomor Kartu Keluarga penerima bantuan sosial.")
         
         with st.expander("NIK CAPIL"):
-            st.write("Nomor NIK dari setiap penerima bantuan sosial yang sesuai dengan database dari capil.")
+            st.write("Nomor NIK penerima bantuan sosial yang sesuai dengan database dari catatan sipil.")
         
         with st.expander("NO KK CAPIL"):
-            st.write("Nomor Kartu Keluarga dari setiap penerima bantuan sosial yang sesuai dengan database dari capil.")
+            st.write("Nomor Kartu Keluarga penerima bantuan sosial yang sesuai dengan database dari catatan sipil.")
         
         with st.expander("NAMA"):
             st.write("Nama lengkap penerima bantuan sosial")
         
         with st.expander("NAMA LENGKAP CAPIL"):
-            st.write("Nama lengkap penerima bantuan sosial yang sesuai dengan database dari capil")
+            st.write("Nama lengkap penerima bantuan sosial yang sesuai dengan database dari catatan sipil")
         
         with st.expander("KATEGORI"):
             st.write("Kategori pekerjan tiap penerima bantuan sosial")
@@ -61,10 +71,10 @@ def data_processing():
 
     with row2_2:
         with st.expander("ALAMAT CAPIL"):
-            st.write("Alamat lengkap penerima bantuan sosial di Balikpapan yang sesuai dengan database dari capil")
+            st.write("Alamat lengkap penerima bantuan sosial di Balikpapan yang sesuai dengan database dari catatan sipil")
 
         with st.expander("KELURAHAN CAPIL"):
-            st.write("Data kelurahan penerima bantuan sosial di Balikpapan yang sesuai dengan database dari capil, seperti:")
+            st.write("Data kelurahan penerima bantuan sosial di Balikpapan yang sesuai dengan database dari catatan sipil, seperti:")
             st.write("1. Baru Ilir")
             st.write("2. Baru Tengah")
             st.write("3. Baru Ulu")
@@ -100,7 +110,7 @@ def data_processing():
             st.write("33. Teritip")
         
         with st.expander("KECAMATAN CAPIL"):
-            st.write("Data kecamatan penerima bantuan sosial di Balikpapan yang sesuai dengan database dari capil")
+            st.write("Data kecamatan penerima bantuan sosial di Balikpapan yang sesuai dengan database dari catatan sipil")
             st.write("1. Balikpapan Barat")
             st.write("2. Balikpapan Kota")
             st.write("3. Balikpapan Selatan")
@@ -109,28 +119,28 @@ def data_processing():
             st.write("6. Balikpapan Utara")
         
         with st.expander("DOMISILI"):
-            st.write("")
+            st.write("Hasil klasifikasi domisili penerima bantuan sosial berdasarkan alamat konfirmasi catatan sipil")
         
         with st.expander("KETERANGAN NIK"):
-            st.write("")
+            st.write("Hasil kecocokan NIK penerima bansos dengan NIK dari catatan sipil")
         
         with st.expander("JENIS KELAMIN"):
-            st.write("Gender tiap penerima bansos")
+            st.write("Jenis kelamin tiap penerima bansos")
         
         with st.expander("KETERANGAN NAMA"):
-            st.write("")
+            st.write("Hasil kecocokan nama penerima bansos dengan nama dari catatan sipil")
         
         with st.expander("KETERANGAN NIK DAN KK"):
-            st.write("")
+            st.write("Prioritas satu NIK untuk satu penerima bantuan sosial berdasarkan NO KK")
         
         with st.expander("USIA"):
             st.write("Rentang usia tiap penerima bansos")
         
         with st.expander("LABEL PENERIMA"):
             st.write("Kategori penerima bansos yang terdiri dari:")
-            st.write("1. SANGAT LAYAK")
-            st.write("2. LAYAK")
-            st.write("3. TIDAK LAYAK")
+            st.write("1. SANGAT LAYAK DAPAT BANSOS")
+            st.write("2. LAYAK DAPAT BANSOS")
+            st.write("3. TIDAK LAYAK DAPAT BANSOS")
 
     st.markdown("""<hr style="height:1px;border:none;color:#bbbbbb;background-color:#bbbbbb;" /> """, unsafe_allow_html=True)
     # DATA PROCESSING
