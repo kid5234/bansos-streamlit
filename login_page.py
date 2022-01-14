@@ -3,8 +3,7 @@ import pandas as pd
 from sqlalchemy import create_engine, engine 
 
 def query(gmail, password):
-    rootpassword=""
-    db_connection_str = 'mysql+pymysql://root:'+rootpassword+'@localhost/db_bansos'
+    db_connection_str = 'mysql+pymysql://'+st.secrets['db_user']+':'+st.secrets['db_pass']+'@'+st.secrets['db_host']+'/'+st.secrets['db_name']
     db_connection = create_engine(db_connection_str)
     query = 'SELECT * FROM admin WHERE Email="{}" AND Password="{}"'.format(gmail, password)
     df = pd.read_sql(query, con=db_connection)

@@ -23,7 +23,7 @@ def visualization_page():
     # st.write("Total Penerima: ", all_bansos["KET_KK_NIK" == "KK AMAN"].sum())
     # st.write("Total Ditolak: ", )
 
-    conn = MySQLdb.connect(host="localhost", user="root", passwd="", db="db_bansos")
+    conn = MySQLdb.connect(host=st.secrets['db_host'], user=st.secrets['db_user'], passwd=st.secrets['db_pass'], db=st.secrets['db_name'])
     cursorBansos = conn.cursor()
     cursorBansos.execute('select bansos.nik, bansos.no_kk, bansos.nama, bansos.nik_capil, bansos.no_kk_capil, bansos.nama_lgkp_capil, bansos.status, bansos.kategori, bansos.opd_pengampu, bansos.tahap, bansos.alamat_capil, bansos.kelurahan_capil, bansos.kecamatan_capil, bansos.domisili, bansos.ket_nik, bansos.jenis_kelamin, bansos.ket_nama, bansos.ket_kk_nik, bansos.usia, bansos.label, bansos.date, kelurahan.latitude, kelurahan.longitude  from bansos left join kelurahan on bansos.kelurahan_capil = kelurahan.kelurahan_capil');
     # 'select * from bansos left join kelurahan on bansos.kelurahan_capil = kelurahan.kelurahan_capil'
@@ -165,8 +165,8 @@ def visualization_page():
     dfKelurahan['text'] = dfKelurahan['KELURAHAN_CAPIL']
     access_token = 'pk.eyJ1IjoiZGV2YW5pc2R3aSIsImEiOiJja3kzeXFhcjQwMzU1MnZxYzJ5OG1rYmIxIn0.nB78CAvkZi-J9os0VsBoCw'
     px.set_mapbox_access_token(access_token)
-    figKelurahan = px.scatter_mapbox(dfKelurahan, lat="lat", lon='lon', size='count', size_max=15, zoom=11, hover_name='KELURAHAN_CAPIL')
-    st.plotly_chart(figKelurahan, use_container_width=True)
+    figKelurahan = px.scatter_mapbox(dfKelurahan, lat="lat", lon='lon', size='count', size_max=15, zoom=11, hover_name='KELURAHAN_CAPIL',)
+    st.plotly_chart(figKelurahan, use_container_width=True) 
 
     row_OPD, row_tahap = st.columns(2)
     with row_OPD:
