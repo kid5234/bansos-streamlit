@@ -1,3 +1,4 @@
+from venv import create
 import streamlit as st
 import pandas as pd
 from sqlalchemy import create_engine
@@ -21,13 +22,13 @@ def regist_page():
         get_data().clear() 
         if len(username)>0 and len(gmail) > 0 and len(password) > 0 and len(repassword) > 0:
             if (repassword == password):   
-                get_data().append({"Id": id[0], "Username":username, "Email": gmail, "Password": password, "RePassword": repassword})
+                get_data().append({"Username":username, "Email": gmail, "Password": password, "RePassword": repassword})
                 df = pd.DataFrame(get_data())
                 if len(df) > 1:
                     st.error("gagal membuat Akun")
                 else:
                     st.success("Berhasil membuat Akun")
-                    engine = create_engine('mysql://root:@localhost/db_bansos')
+                    engine = create_engine('mysql+pymysql://'+st.secrets['db_username']+':'+st.secrets['db_password']+'@'+st.secrets['db_host']+'/'+st.secrets['db_name'])
                     df.to_sql('admin', con=engine, if_exists='append', index=False)
             else:
                 st.error("Password tidak sama")
