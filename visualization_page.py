@@ -4,7 +4,6 @@ import streamlit as st
 import plotly.express as px
 import pandas as pd
 import datetime
-import MySQLdb
 
 from login_page import query
 
