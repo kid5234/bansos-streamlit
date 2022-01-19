@@ -3,6 +3,7 @@ import streamlit as st
 import pandas as pd
 from sqlalchemy import create_engine
 import numpy as np
+import hashlib
     
 def regist_page():
 
@@ -22,7 +23,8 @@ def regist_page():
         get_data().clear() 
         if len(username)>0 and len(gmail) > 0 and len(password) > 0 and len(repassword) > 0:
             if (repassword == password):   
-                get_data().append({"Username":username, "Email": gmail, "Password": password, "RePassword": repassword})
+                md5 = hashlib.md5(password.encode()).hexdigest()
+                get_data().append({"Username":username, "Email": gmail, "Password": md5})
                 df = pd.DataFrame(get_data())
                 if len(df) > 1:
                     st.error("gagal membuat Akun")

@@ -45,8 +45,7 @@ def main(obj = ""):
         menu.append("Unduh")
         menu.append("Tambah Admin")
         menu.append("Logout")
-        # st.write(menu)
-
+     
     choice = st.sidebar.selectbox("Silahkan pilih:", menu, index)
     
     if choice == "Informasi":
