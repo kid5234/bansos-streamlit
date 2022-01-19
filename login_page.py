@@ -1,11 +1,16 @@
+from base64 import encode
+import base64
+import dbm
+from git import base
 import streamlit as st
 import pandas as pd
 from sqlalchemy import create_engine, engine 
+import hashlib
 
-def query(gmail, password):
+def query(gmail, passhash):
     db_connection_str = 'mysql+pymysql://'+st.secrets['db_username']+':'+st.secrets['db_password']+'@'+st.secrets['db_host']+'/'+st.secrets['db_name']
     db_connection = create_engine(db_connection_str)
-    query = 'SELECT * FROM admin WHERE Email="{}" AND Password="{}"'.format(gmail, password)
+    query = 'SELECT * FROM admin WHERE Email="{}" AND Password="{}"'.format(gmail, passhash)
     df = pd.read_sql(query, con=db_connection)
     return df
 
@@ -16,7 +21,8 @@ def login_page(obj):
  
     if st.button("Login"):
         if len(gmail) > 0 and len(password) > 0:
-            data = query(gmail, password)
+            passhash = hashlib.md5(password.encode()).hexdigest()
+            data = query(gmail, passhash)
             if len(data)>0:
                 st.success("berhasil")
                 id = data["Id"]
@@ -32,12 +38,13 @@ def login_page(obj):
                 
                 obj.data = "Informasi"
                 st.experimental_rerun()
-
             else:
-                st.error("Data kosong")
-            
+                st.error("Data kosong")   
         else:
             st.error("Ada form kosong")
+    
+            
+
     
 
     
