@@ -25,7 +25,7 @@ def visualization_page():
     # st.write("Total Penerima: ", all_bansos["KET_KK_NIK" == "KK AMAN"].sum())
     # st.write("Total Ditolak: ", )
 
-    dbconnection_str = 'mysql+pymysql://'+st.secrets['db_username']+':'+st.secrets['db_password']+'@'+st.secrets['db_host']+'/'+st.secrets['db_name']
+    dbconnection_str = 'mysql+pymysql://'+['db_username']+':'+['db_password']+'@'+['db_host']+'/'+['db_name']
     engine = create_engine(dbconnection_str)
     query = engine.execute('select bansos.nik, bansos.no_kk, bansos.nama, bansos.nik_capil, bansos.no_kk_capil, bansos.nama_lgkp_capil, bansos.status, bansos.kategori, bansos.opd_pengampu, bansos.tahap, bansos.alamat_capil, bansos.kelurahan_capil, bansos.kecamatan_capil, bansos.domisili, bansos.ket_nik, bansos.jenis_kelamin, bansos.ket_nama, bansos.ket_kk_nik, bansos.usia, bansos.label, bansos.date, kelurahan.latitude, kelurahan.longitude  from bansos left join kelurahan on bansos.kelurahan_capil = kelurahan.kelurahan_capil')
     rows = query.fetchall()
