@@ -4,6 +4,7 @@ import pandas as pd
 from sqlalchemy import create_engine
 import numpy as np
 import hashlib
+import os
     
 def regist_page():
 
@@ -30,7 +31,7 @@ def regist_page():
                     st.error("gagal membuat Akun")
                 else:
                     st.success("Berhasil membuat Akun")
-                    engine = create_engine('mysql+pymysql://'+st.secrets['db_username']+':'+st.secrets['db_password']+'@'+st.secrets['db_host']+'/'+st.secrets['db_name'])
+                    engine = create_engine('mysql+pymysql://'+os.environ['db_username']+':'+os.environ['db_password']+'@'+os.environ['db_host']+'/'+os.environ['db_name'])
                     df.to_sql('admin', con=engine, if_exists='append', index=False)
             else:
                 st.error("Password tidak sama")
