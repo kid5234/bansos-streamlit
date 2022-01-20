@@ -6,9 +6,10 @@ import streamlit as st
 import pandas as pd
 from sqlalchemy import create_engine, engine 
 import hashlib
+import os
 
 def query(gmail, passhash):
-    db_connection_str = 'mysql+pymysql://'+st.secrets['db_username']+':'+st.secrets['db_password']+'@'+st.secrets['db_host']+'/'+st.secrets['db_name']
+    db_connection_str = 'mysql+pymysql://'+os.environ['db_username']+':'+os.environ['db_password']+'@'+os.environ['db_host']+'/'+os.environ['db_name']
     db_connection = create_engine(db_connection_str)
     query = 'SELECT * FROM admin WHERE Email="{}" AND Password="{}"'.format(gmail, passhash)
     df = pd.read_sql(query, con=db_connection)
