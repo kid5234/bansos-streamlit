@@ -9,3 +9,4 @@ mysql-connector==2.2.9
 mysql-connector-python==8.0.27
 mysqlclient==2.1.0
 PyMySQL==1.0.2
+openpyxl==3.0.9
